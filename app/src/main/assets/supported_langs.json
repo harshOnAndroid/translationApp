@@ -1,0 +1,226 @@
+  {
+  "langs": [
+    {
+      "code": "no",
+      "name": "Norwegian",
+      "nativeName": "Norsk",
+      "country_flag": "flags/NO@3x.png"
+    },
+    {
+      "code": "fi",
+      "name": "Finnish",
+      "nativeName": "suomi, suomen kieli",
+      "country_flag": "flags/FI@3x.png"
+    },
+    {
+      "code": "sw",
+      "name": "Swahili",
+      "nativeName": "Kiswahili",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "iw",
+      "name": "Hebrew",
+      "nativeName": "עִברִית",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "sr",
+      "name": "Serbian",
+      "nativeName": "српски језик",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "hr",
+      "name": "Croatian",
+      "nativeName": "hrvatski",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "ta",
+      "name": "Tamil",
+      "nativeName": "தமிழ்",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "el",
+      "name": "Greek, Modern",
+      "nativeName": "Ελληνικά",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "th",
+      "name": "Thai",
+      "nativeName": "ไทย",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "en",
+      "name": "English",
+      "nativeName": "English",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "es",
+      "name": "Spanish; Castilian",
+      "nativeName": "español, castellano",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "tl",
+      "name": "Tagalog",
+      "nativeName": "Wikang Tagalog, ᜏᜒᜃᜅ᜔ ᜆᜄᜎᜓᜄ᜔",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "id",
+      "name": "Indonesian",
+      "nativeName": "Bahasa Indonesia",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "da",
+      "name": "Danish",
+      "nativeName": "dansk",
+      "country_flag": "flags/DA@3x.png"
+    },
+    {
+      "code": "vi",
+      "name": "Vietnamese",
+      "nativeName": "Tiếng Việt",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "ar",
+      "name": "Arabic",
+      "nativeName": "العربية",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "fr",
+      "name": "French",
+      "nativeName": "français, langue française",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "ko",
+      "name": "Korean",
+      "nativeName": "한국어 (韓國語), 조선말 (朝鮮語)",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "ru",
+      "name": "Russian",
+      "nativeName": "русский язык",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "de",
+      "name": "German",
+      "nativeName": "Deutsch",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "ht",
+      "name": "Haitian; Haitian Creole",
+      "nativeName": "Kreyòl ayisyen",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "hi",
+      "name": "Hindi",
+      "nativeName": "हिन्दी, हिंदी",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "pt",
+      "name": "Portuguese",
+      "nativeName": "Português",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "it",
+      "name": "Italian",
+      "nativeName": "Italiano",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "pl",
+      "name": "Polish",
+      "nativeName": "polski",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "ur",
+      "name": "Urdu",
+      "nativeName": "اردو",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "fa",
+      "name": "Persian",
+      "nativeName": "فارسی",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "gu",
+      "name": "Gujarati",
+      "nativeName": "ગુજરાતી",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "te",
+      "name": "Telugu",
+      "nativeName": "తెలుగు",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "cs",
+      "name": "Czech",
+      "nativeName": "česky, čeština",
+      "country_flag": "flags/CS@3x.png"
+    },
+    {
+      "code": "bn",
+      "name": "Bengali",
+      "nativeName": "বাংলা",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "lv",
+      "name": "Latvian",
+      "nativeName": "Latviešu",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "hu",
+      "name": "Hungarian",
+      "nativeName": "Ungāru valoda",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "zh-CN",
+      "name": "Chinese (Simplified)",
+      "nativeName": "简体中文）",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "ja",
+      "name": "Japanese",
+      "nativeName": "日本語",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "sq",
+      "name": "Albanian",
+      "nativeName": "shqiptar",
+      "country_flag": "flags/ID@3x.png"
+    },
+    {
+      "code": "tr",
+      "name": "Turkish",
+      "nativeName": "Türk",
+      "country_flag": "flags/ID@3x.png"
+    }
+  ]
+}
