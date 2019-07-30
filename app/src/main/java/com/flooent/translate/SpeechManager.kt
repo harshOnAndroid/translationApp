@@ -9,7 +9,7 @@ import android.speech.SpeechRecognizer
 import android.util.Log
 
 class SpeechManager private constructor(
-    private var view: TranslationScreenView,
+    private var view: SpeechManagerListener?,
     private var applicationContext: Context
 ) : RecognitionListener {
 
@@ -27,7 +27,7 @@ class SpeechManager private constructor(
     companion object{
         private var instance: SpeechManager? = null
 
-        fun getInstance(view:TranslationScreenView, context:Context) : SpeechManager? {
+        fun getInstance(view:SpeechManagerListener, context:Context) : SpeechManager? {
 
             if(instance == null)
                 instance = SpeechManager(view,context)
@@ -79,14 +79,24 @@ class SpeechManager private constructor(
         speechRecognizer.startListening(intent)*/
     }
 
+    fun changeNativeLang(langCode:String){
+        nativeLangCode = langCode
+
+    }
+
+    fun changeForeignLang(langCode:String){
+        foreignLangCode = langCode
+
+    }
+
 
     override fun onReadyForSpeech(p0: Bundle?) {
         Log.e("speech recognition", "onReadyForSpeech")
-        view.onReadyForSpeech()
+        view?.onReadyForSpeech()
     }
 
     override fun onRmsChanged(p0: Float) {
-        Log.e("speech recognition", "onRmsChanged")
+//        Log.e("speech recognition", "onRmsChanged")
     }
 
     override fun onBufferReceived(p0: ByteArray?) {
@@ -111,7 +121,7 @@ class SpeechManager private constructor(
 
     override fun onError(p0: Int) {
         Log.e("speech recognition", "onError= $p0")
-        view.onError()
+        view?.onError()
     }
 
     override fun onResults(p0: Bundle?) {
@@ -129,7 +139,11 @@ class SpeechManager private constructor(
                     "confidence vals = $scores"
         )
 
-        view.onResults(isNativeInteraction, results?.get(0))
+        view?.onResults(isNativeInteraction, results?.get(0))
 
+    }
+
+    fun removeView() {
+        view=null
     }
 }

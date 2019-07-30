@@ -15,9 +15,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat
+import com.google.firebase.FirebaseApp
+import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.activity_homeScreen.*
+import kotlinx.android.synthetic.main.activity_home_screen.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
@@ -26,11 +28,14 @@ import java.nio.charset.Charset
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HomeScreen : AppCompatActivity(), TranslationScreenView {
+class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManagerListener {
 
+    private var translationManager: TranslationManager? = null
+    private var nativeToForeignTranslator: FirebaseTranslator? = null
+    private var foreignToNativeTranslator: FirebaseTranslator? = null
     private var speechManager: SpeechManager? = null
-    private var nativeLangCode: String = "us-en"
-    private var foreignLangCode: String = "us-en"
+    private var nativeLangCode: String = "en"
+    private var foreignLangCode: String = "en"
     private var allLangs: ArrayList<Langs>? = null
     private lateinit var speechRecognizer: SpeechRecognizer
     private val REQ_CODE_SPEECH_INPUT = 100
@@ -39,9 +44,10 @@ class HomeScreen : AppCompatActivity(), TranslationScreenView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_homeScreen)
+        setContentView(R.layout.activity_home_screen)
 
         speechManager = SpeechManager.getInstance(this, applicationContext)
+        translationManager = TranslationManager.getInstance(this)
 
         img_speakNative.setOnClickListener {
             //promptSpeechInput()
@@ -66,6 +72,8 @@ class HomeScreen : AppCompatActivity(), TranslationScreenView {
             showLangsDialog()
         }
 
+        translationManager?.initTranslator(nativeLangCode, foreignLangCode)
+
     }
 
     private fun listenAndTranslate(isNativeInteraction: Boolean) {
@@ -76,11 +84,31 @@ class HomeScreen : AppCompatActivity(), TranslationScreenView {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             speechManager?.startListeningToSpeech(isNativeInteraction)
+            showSpeakNowToast()
         } else {
 
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 1)
         }
 
+    }
+
+    private fun showSpeakNowToast() {
+
+        Toast.makeText(this,"Speak Now",Toast.LENGTH_SHORT).show()
+
+//        val toast = Toast(this)
+//        toast.duration = Toast.LENGTH_SHORT
+//        toast.setMargin(10f,200f)
+//        toast.setText("Speak Now")
+//        toast.show()
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        speechManager?.removeView()
+        translationManager?.removeView()
     }
 
 
@@ -133,9 +161,13 @@ class HomeScreen : AppCompatActivity(), TranslationScreenView {
         if (isNativeLangSelection) {
             txt_langNative.text = selectedLang?.name
             nativeLangCode = selectedLang?.code!!
+            speechManager?.changeNativeLang(nativeLangCode)
+            translationManager?.changeNativeLang(nativeLangCode)
         } else {
             txt_langForeign.text = selectedLang?.name
             foreignLangCode = selectedLang?.code!!
+            speechManager?.changeForeignLang(foreignLangCode)
+            translationManager?.changeForeignLang(foreignLangCode)
         }
     }
 
@@ -206,6 +238,7 @@ class HomeScreen : AppCompatActivity(), TranslationScreenView {
 
     override fun onReadyForSpeech() {
         layout_progress.visibility = View.VISIBLE
+//        Toast.makeText()
     }
 
     override fun onError() {
@@ -221,7 +254,21 @@ class HomeScreen : AppCompatActivity(), TranslationScreenView {
 
 
         layout_progress.visibility = View.GONE
+
+        translationManager?.translateText(isNativeInteraction, resultText)
     }
+
+    override fun onTranslationSuccessful(nativeInteraction: Boolean, translatedText: String?) {
+        if (nativeInteraction)
+            txt_speechOutputForeign.text = translatedText
+        else
+            txt_speechOutputNative.text = translatedText
+    }
+
+    override fun onTranslationFailure(message: String?) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    }
+
 
     /*override fun onReadyForSpeech(p0: Bundle?) {
         Log.e("speech recognition", "onReadyForSpeech")
