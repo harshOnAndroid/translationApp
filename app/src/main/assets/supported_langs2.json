@@ -5,6 +5,10 @@
       "name": "Afrikaans"
     },
     {
+      "code": "sq",
+      "name": "Albanian"
+    },
+    {
       "code": "ar",
       "name": "Arabic"
     },
@@ -13,36 +17,36 @@
       "name": "Belarusian"
     },
     {
-      "code": "bg",
-      "name": "Bulgarian"
-    },
-    {
       "code": "bn",
       "name": "Bengali"
+    },
+    {
+      "code": "bg",
+      "name": "Bulgarian"
     },
     {
       "code": "ca",
       "name": "Catalan"
     },
     {
-      "code": "cs",
-      "name": "Czech"
+      "code": "zh",
+      "name": "Chinese"
     },
     {
-      "code": "cy",
-      "name": "Welsh"
+      "code": "hr",
+      "name": "Croatian"
+    },
+    {
+      "code": "cs",
+      "name": "Czech"
     },
     {
       "code": "da",
       "name": "Danish"
     },
     {
-      "code": "de",
-      "name": "German"
-    },
-    {
-      "code": "el",
-      "name": "Greek"
+      "code": "nl",
+      "name": "Dutch"
     },
     {
       "code": "en",
@@ -53,16 +57,8 @@
       "name": "Esperanto"
     },
     {
-      "code": "es",
-      "name": "Spanish"
-    },
-    {
       "code": "et",
       "name": "Estonian"
-    },
-    {
-      "code": "fa",
-      "name": "Persian"
     },
     {
       "code": "fi",
@@ -73,16 +69,28 @@
       "name": "French"
     },
     {
-      "code": "ga",
-      "name": "Irish"
-    },
-    {
       "code": "gl",
       "name": "Galician"
     },
     {
+      "code": "ka",
+      "name": "Georgian"
+    },
+    {
+      "code": "de",
+      "name": "German"
+    },
+    {
+      "code": "el",
+      "name": "Greek"
+    },
+    {
       "code": "gu",
       "name": "Gujarati"
+    },
+    {
+      "code": "ht",
+      "name": "Haitian"
     },
     {
       "code": "he",
@@ -93,24 +101,20 @@
       "name": "Hindi"
     },
     {
-      "code": "hr",
-      "name": "Croatian"
-    },
-    {
-      "code": "ht",
-      "name": "Haitian"
-    },
-    {
       "code": "hu",
       "name": "Hungarian"
+    },
+    {
+      "code": "is",
+      "name": "Icelandic"
     },
     {
       "code": "id",
       "name": "Indonesian"
     },
     {
-      "code": "is",
-      "name": "Icelandic"
+      "code": "ga",
+      "name": "Irish"
     },
     {
       "code": "it",
@@ -121,10 +125,6 @@
       "name": "Japanese"
     },
     {
-      "code": "ka",
-      "name": "Georgian"
-    },
-    {
       "code": "kn",
       "name": "Kannada"
     },
@@ -133,20 +133,16 @@
       "name": "Korean"
     },
     {
-      "code": "lt",
-      "name": "Lithuanian"
-    },
-    {
       "code": "lv",
       "name": "Latvian"
     },
     {
-      "code": "mk",
-      "name": "Macedonian"
+      "code": "lt",
+      "name": "Lithuanian"
     },
     {
-      "code": "mr",
-      "name": "Marathi"
+      "code": "mk",
+      "name": "Macedonian"
     },
     {
       "code": "ms",
@@ -157,12 +153,16 @@
       "name": "Maltese"
     },
     {
-      "code": "nl",
-      "name": "Dutch"
+      "code": "mr",
+      "name": "Marathi"
     },
     {
       "code": "no",
       "name": "Norwegian"
+    },
+    {
+      "code": "fa",
+      "name": "Persian"
     },
     {
       "code": "pl",
@@ -181,6 +181,10 @@
       "name": "Russian"
     },
     {
+      "code": "es",
+      "name": "Spanish"
+    },
+    {
       "code": "sk",
       "name": "Slovak"
     },
@@ -189,16 +193,16 @@
       "name": "Slovenian"
     },
     {
-      "code": "sq",
-      "name": "Albanian"
+      "code": "sw",
+      "name": "Swahili"
     },
     {
       "code": "sv",
       "name": "Swedish"
     },
     {
-      "code": "sw",
-      "name": "Swahili"
+      "code": "tl",
+      "name": "Tagalog"
     },
     {
       "code": "ta",
@@ -211,10 +215,6 @@
     {
       "code": "th",
       "name": "Thai"
-    },
-    {
-      "code": "tl",
-      "name": "Tagalog"
     },
     {
       "code": "tr",
@@ -233,8 +233,8 @@
       "name": "Vietnamese"
     },
     {
-      "code": "zh",
-      "name": "Chinese"
+      "code": "cy",
+      "name": "Welsh"
     }
   ]
 }
