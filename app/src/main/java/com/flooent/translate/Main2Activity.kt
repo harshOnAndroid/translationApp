@@ -11,8 +11,7 @@ import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
-import android.widget.ImageButton
-import android.widget.TextView
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,32 +29,40 @@ import kotlin.collections.ArrayList
 
 class Main2Activity : AppCompatActivity(), RecognitionListener {
 
-    private var selectedLangCode: String = "us-en"
+    private var nativeLangCode: String = "us-en"
+    private var foreignLangCode: String = "us-en"
     private var allLangs: ArrayList<Langs>? = null
     private var speechListener: FlooentSpeechListener? = null
     private lateinit var speechRecognizer: SpeechRecognizer
-    private var txtSpeechInput: TextView? = null
-    private var btnSpeak: ImageButton? = null
     private val REQ_CODE_SPEECH_INPUT = 100
+    private var isNativeInteraction = true
+    private var isNativeLangSelection = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        txtSpeechInput = findViewById(R.id.txtSpeechInput) as TextView
-        btnSpeak = findViewById(R.id.btnSpeak) as ImageButton
-
-        // hide the action bar
-//        getActionBar().hide()
-
-        btnSpeak!!.setOnClickListener {
+        img_speakNative.setOnClickListener {
             //                promptSpeechInput()
-
+            isNativeInteraction = true
             listenAndTranslate()
 
         }
 
-        ll_lang.setOnClickListener {
+        img_flagNative.setOnClickListener {
+            isNativeLangSelection = true
+            showLangsDialog()
+        }
+
+        img_speakForeign.setOnClickListener {
+            //                promptSpeechInput()
+            isNativeInteraction = false
+            listenAndTranslate()
+
+        }
+
+        img_flagForeign.setOnClickListener {
+            isNativeLangSelection = false
             showLangsDialog()
         }
 
@@ -142,8 +149,13 @@ class Main2Activity : AppCompatActivity(), RecognitionListener {
     private fun setSelectedLang(which: Int) {
         val selectedLang = allLangs?.get(which)
 
-        txt_lang.text = selectedLang?.name
-        selectedLangCode = selectedLang?.code!!
+        if (isNativeLangSelection) {
+            txt_langNative.text = selectedLang?.name
+            nativeLangCode = selectedLang?.code!!
+        } else {
+            txt_langForeign.text = selectedLang?.name
+            foreignLangCode = selectedLang?.code!!
+        }
     }
 
     fun getLangsArrayList(): java.util.ArrayList<Langs>? {
@@ -194,9 +206,9 @@ class Main2Activity : AppCompatActivity(), RecognitionListener {
             REQ_CODE_SPEECH_INPUT -> {
                 if (resultCode == Activity.RESULT_OK && null != data) {
 
-                    val result = data!!
+                    val result = data
                         .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                    txtSpeechInput!!.setText(result.get(0))
+                    txt_speechOutputNative.setText(result.get(0))
                 }
             }
         }
@@ -217,7 +229,12 @@ class Main2Activity : AppCompatActivity(), RecognitionListener {
             RecognizerIntent.EXTRA_LANGUAGE_MODEL,
             RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
         )
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, selectedLangCode)
+
+        if (isNativeInteraction)
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, nativeLangCode)
+        else
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, foreignLangCode)
+
         intent.putExtra(
             RecognizerIntent.EXTRA_PROMPT,
             getString(R.string.speech_prompt)
@@ -233,6 +250,7 @@ class Main2Activity : AppCompatActivity(), RecognitionListener {
 
     override fun onReadyForSpeech(p0: Bundle?) {
         Log.e("speech recognition", "onReadyForSpeech")
+        layout_progress.visibility = View.VISIBLE
     }
 
     override fun onRmsChanged(p0: Float) {
@@ -261,6 +279,7 @@ class Main2Activity : AppCompatActivity(), RecognitionListener {
 
     override fun onError(p0: Int) {
         Log.e("speech recognition", "onError= $p0")
+        layout_progress.visibility = View.GONE
     }
 
     override fun onResults(p0: Bundle?) {
@@ -278,7 +297,13 @@ class Main2Activity : AppCompatActivity(), RecognitionListener {
                     "confidence vals = $scores"
         )
 
-        txtSpeechInput!!.setText(results?.get(0))
+        if (isNativeInteraction)
+            txt_speechOutputNative.setText(results?.get(0))
+        else
+            txt_speechOutputForeign.text = results?.get(0)
+
+
+        layout_progress.visibility = View.GONE
 
     }
 }

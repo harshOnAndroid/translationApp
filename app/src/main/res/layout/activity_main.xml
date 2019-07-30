@@ -1,82 +1,150 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_gradient"
-                android:orientation="vertical">
-
-    <TextView
-            android:id="@+id/txtSpeechInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:textColor="@color/white"
-            android:textSize="26dp"
-            android:textStyle="normal"
-            android:text="Your text appears here."/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="60dp">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-
-        <LinearLayout
-                android:id="@+id/ll_lang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:gravity="center">
-            <ImageView
-                    android:id="@+id/img_flag"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/ic_translate"
-            />
-
-            <TextView
-                    android:id="@+id/txt_lang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="English"
-                    android:textColor="@color/white"
-                    android:textSize="15dp"
-                    android:textStyle="bold"/>
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+        <TextView
+                android:id="@+id/txt_speechOutputNative"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="3">
+                android:textColor="#000"
+                android:textSize="26dp"
+                android:textStyle="normal"
+                android:text="Your text appears here."
+                android:layout_weight="1"/>
 
-            <ImageButton
-                    android:id="@+id/btnSpeak"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:background="@null"
-                    android:src="@drawable/ico_mic"
-                    android:scaleType="centerInside"/>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/tap_on_mic"
-                    android:textColor="@color/white"
-                    android:textSize="15dp"
-                    android:textStyle="normal"/>
-        </LinearLayout>
+        <TextView
+                android:id="@+id/txt_speechOutputForeign"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="#000"
+                android:textSize="26dp"
+                android:textStyle="normal"
+                android:text="Your text appears here."
+                android:layout_weight="1"
+                android:background="@color/grey_e2"/>
+
     </LinearLayout>
 
+    <View android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/white"/>
 
-</RelativeLayout>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+    >
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+        >
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@color/white">
+
+                <ImageView
+                        android:id="@+id/img_speakNative"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@null"
+                        android:src="@drawable/bg_mic_blue"
+                />
+
+                <ImageView
+                        android:id="@+id/img_flagNative"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/bg_globe_blue"
+                        android:layout_marginTop="20dp"
+                />
+
+                <TextView
+                        android:id="@+id/txt_langNative"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="English"
+                        android:textColor="#000"
+                        android:textSize="15dp"
+                        android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@color/grey_e2">
+
+                <TextView
+                        android:id="@+id/txt_langForeign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="English"
+                        android:textColor="#000"
+                        android:textSize="15dp"
+                        android:textStyle="bold"/>
+
+                <Button
+                        android:id="@+id/img_flagForeign"
+                        android:layout_width="45dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/bg_globe_white"
+
+                />
+
+                <ImageView
+                        android:id="@+id/img_speakForeign"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@null"
+                        android:src="@drawable/bg_mic_white"
+                        android:layout_marginTop="20dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/layout_progress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@color/transparent"
+                android:visibility="gone">
+
+            <ProgressBar
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</LinearLayout>

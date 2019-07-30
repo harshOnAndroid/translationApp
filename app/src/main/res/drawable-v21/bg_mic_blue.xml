@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="#4a4a4a">
+
+        <item>
+
+            <shape android:shape="oval">
+
+                <corners android:radius="4dp"/>
+                <solid android:color="@color/blue">
+
+                </solid>
+            </shape>
+        </item>
+
+        <item android:drawable="@drawable/ic_microphone_white"
+              android:left="10dp" android:right="10dp"
+              android:top="10dp" android:bottom="10dp"/>
+</ripple>

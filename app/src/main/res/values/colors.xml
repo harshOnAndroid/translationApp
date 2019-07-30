@@ -2,8 +2,11 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#188CFF</color>
     <color name="white">#fff</color>
+    <color name="grey_e2">#E2E2E2</color>
     <color name="bg_gradient_end">#FF67FF</color>
-    <color name="bg_gradient_start">#7979FC</color>
+    <color name="blue">#188CFF</color>
+    <color name="transparent">#80000000</color>
+
 </resources>
