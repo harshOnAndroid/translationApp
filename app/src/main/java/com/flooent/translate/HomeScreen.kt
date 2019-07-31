@@ -15,7 +15,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat
-import com.google.firebase.FirebaseApp
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -28,8 +27,9 @@ import java.nio.charset.Charset
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManagerListener {
+class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManagerListener, TextToSpeechManagerListener {
 
+    private var ttsManager: TextToSpeechManager? = null
     private var translationManager: TranslationManager? = null
     private var nativeToForeignTranslator: FirebaseTranslator? = null
     private var foreignToNativeTranslator: FirebaseTranslator? = null
@@ -48,6 +48,8 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
 
         speechManager = SpeechManager.getInstance(this, applicationContext)
         translationManager = TranslationManager.getInstance(this)
+        ttsManager = TextToSpeechManager.getInstance(applicationContext)
+        ttsManager
 
         img_speakNative.setOnClickListener {
             //promptSpeechInput()
@@ -94,7 +96,7 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
 
     private fun showSpeakNowToast() {
 
-        Toast.makeText(this,"Speak Now",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Speak Now", Toast.LENGTH_SHORT).show()
 
 //        val toast = Toast(this)
 //        toast.duration = Toast.LENGTH_SHORT
@@ -163,11 +165,13 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
             nativeLangCode = selectedLang?.code!!
             speechManager?.changeNativeLang(nativeLangCode)
             translationManager?.changeNativeLang(nativeLangCode)
+            ttsManager?.setNativeLanguage(nativeLangCode)
         } else {
             txt_langForeign.text = selectedLang?.name
             foreignLangCode = selectedLang?.code!!
             speechManager?.changeForeignLang(foreignLangCode)
             translationManager?.changeForeignLang(foreignLangCode)
+            ttsManager?.setForeignLanguage(foreignLangCode)
         }
     }
 
@@ -235,14 +239,41 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
             Toast.makeText(applicationContext, "Cannot proceed without audio permission", Toast.LENGTH_LONG).show()
     }
 
+    fun lockSpeakViews() {
+
+        if(isNativeInteraction){
+            layout_nativeSpeakProgress.visibility = View.VISIBLE
+            layout_progressForeign.visibility = View.VISIBLE
+
+            layout_foreignSpeakProgress.visibility = View.GONE
+            layout_progressNative.visibility = View.GONE
+
+        }else{
+            layout_nativeSpeakProgress.visibility = View.GONE
+            layout_progressForeign.visibility = View.GONE
+
+            layout_foreignSpeakProgress.visibility = View.VISIBLE
+            layout_progressNative.visibility = View.VISIBLE
+        }
+
+    }
+
+    fun unlockSpeakViews() {
+
+        layout_nativeSpeakProgress.visibility = View.GONE
+        layout_progressForeign.visibility = View.GONE
+
+        layout_foreignSpeakProgress.visibility = View.GONE
+        layout_progressNative.visibility = View.GONE
+
+    }
 
     override fun onReadyForSpeech() {
-        layout_progress.visibility = View.VISIBLE
-//        Toast.makeText()
+        lockSpeakViews()
     }
 
     override fun onError() {
-        layout_progress.visibility = View.GONE
+        unlockSpeakViews()
     }
 
 
@@ -252,81 +283,37 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
         else
             txt_speechOutputForeign.text = resultText
 
-
-        layout_progress.visibility = View.GONE
+        unlockSpeakViews()
 
         translationManager?.translateText(isNativeInteraction, resultText)
     }
 
+    fun onLanguageDownloadStarted() {
+
+    }
+
+    override fun onLanguageDownloadSuccessful() {
+
+    }
+
+    override fun onLanguageDownloadFailure() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onTranslationSuccessful(nativeInteraction: Boolean, translatedText: String?) {
-        if (nativeInteraction)
+        if (nativeInteraction) {
             txt_speechOutputForeign.text = translatedText
-        else
+            ttsManager?.speakForeign(translatedText!!)
+        } else {
             txt_speechOutputNative.text = translatedText
+            ttsManager?.speakNative(translatedText!!)
+        }
+
     }
 
     override fun onTranslationFailure(message: String?) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
-
-    /*override fun onReadyForSpeech(p0: Bundle?) {
-        Log.e("speech recognition", "onReadyForSpeech")
-        layout_progress.visibility = View.VISIBLE
-    }
-
-    override fun onRmsChanged(p0: Float) {
-        Log.e("speech recognition", "onRmsChanged")
-    }
-
-    override fun onBufferReceived(p0: ByteArray?) {
-        Log.e("speech recognition", "onBufferReceived")
-    }
-
-    override fun onPartialResults(p0: Bundle?) {
-        Log.e("speech recognition", "onPartialResults")
-    }
-
-    override fun onEvent(p0: Int, p1: Bundle?) {
-        Log.e("speech recognition", "onEvent")
-    }
-
-    override fun onBeginningOfSpeech() {
-        Log.e("speech recognition", "onBeginningOfSpeech")
-    }
-
-    override fun onEndOfSpeech() {
-        Log.e("speech recognition", "onEndOfSpeech")
-    }
-
-    override fun onError(p0: Int) {
-        Log.e("speech recognition", "onError= $p0")
-        layout_progress.visibility = View.GONE
-    }
-
-    override fun onResults(p0: Bundle?) {
-
-        val results = p0?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-
-        val scores = ArrayList<String>()
-
-        for (i in p0?.getFloatArray(SpeechRecognizer.CONFIDENCE_SCORES)!!) {
-            scores.add(i.toString())
-        }
-
-        Log.e(
-            "speech recognition", "onResults = $results " +
-                    "confidence vals = $scores"
-        )
-
-        if (isNativeInteraction)
-            txt_speechOutputNative.setText(results?.get(0))
-        else
-            txt_speechOutputForeign.text = results?.get(0)
-
-
-        layout_progress.visibility = View.GONE
-
-    }*/
 }
 

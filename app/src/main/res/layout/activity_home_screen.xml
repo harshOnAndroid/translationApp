@@ -43,34 +43,54 @@
           android:layout_height="1dp"
           android:background="@color/white"/>
 
-    <FrameLayout
+
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:layout_weight="1.8"
     >
-
-
-        <LinearLayout
+        <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:animateLayoutChanges="true"
         >
-
             <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:layout_weight="1"
                     android:background="@color/white">
 
-                <ImageView
-                        android:id="@+id/img_speakNative"
+                <FrameLayout
                         android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:background="@null"
-                        android:src="@drawable/bg_mic_blue"
-                />
+                        android:layout_height="100dp">
+                    <ImageView
+                            android:id="@+id/img_speakNative"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:background="@null"
+                            android:src="@drawable/bg_mic_blue"
+                    />
+
+                    <LinearLayout
+                            android:id="@+id/layout_nativeSpeakProgress"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:background="@drawable/bg_round_filled_white"
+                            android:visibility="gone">
+
+                        <ProgressBar
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:progressTint="@color/blue"
+                        />
+
+                    </LinearLayout>
+                </FrameLayout>
+
 
                 <ImageView
                         android:id="@+id/img_flagNative"
@@ -92,12 +112,33 @@
 
             </LinearLayout>
 
+            <View
+                    android:id="@+id/layout_progressNative"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@color/transparent"
+                    android:visibility="gone">
+
+                <!--<ProgressBar-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"/>-->
+
+            </View>
+
+        </FrameLayout>
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:animateLayoutChanges="true"
+        >
             <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:layout_weight="1"
                     android:background="@color/grey_e2">
 
                 <TextView
@@ -118,33 +159,54 @@
 
                 />
 
-                <ImageView
-                        android:id="@+id/img_speakForeign"
+                <FrameLayout
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@null"
-                        android:src="@drawable/bg_mic_white"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="20dp">
+                    <ImageView
+                            android:id="@+id/img_speakForeign"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:background="@null"
+                            android:src="@drawable/bg_mic_white"/>
+
+                    <LinearLayout
+                            android:id="@+id/layout_foreignSpeakProgress"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:background="@drawable/bg_round_filled_white"
+                            android:visibility="gone">
+
+                        <ProgressBar
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:progressTint="@color/white"
+                        />
+
+                    </LinearLayout>
+                </FrameLayout>
+
 
             </LinearLayout>
 
-        </LinearLayout>
+            <View
+                    android:id="@+id/layout_progressForeign"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@color/transparent"
+                    android:visibility="gone">
 
-        <LinearLayout
-                android:id="@+id/layout_progress"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@color/transparent"
-                android:visibility="gone">
+                <!--<ProgressBar-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"/>-->
 
-            <ProgressBar
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"/>
+            </View>
 
-        </LinearLayout>
+        </FrameLayout>
 
-    </FrameLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

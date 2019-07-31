@@ -77,11 +77,13 @@ class TranslationManager private constructor(
             ?.addOnSuccessListener {
                 // Model downloaded successfully. Okay to start translating.
                 // (Set a flag, unhide the translation UI, etc.)
+                view?.onLanguageDownloadSuccessful()
                 Log.println(Log.ASSERT, "in verify model", "successful")
             }
             ?.addOnFailureListener { exception ->
                 // Model couldn’t be downloaded or other internal error.
                 // ...
+                view?.onLanguageDownloadFailure()
                 Log.println(Log.ASSERT, "in verify model", "failed")
 
             }
