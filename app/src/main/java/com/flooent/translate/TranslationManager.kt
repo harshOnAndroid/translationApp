@@ -70,6 +70,7 @@ class TranslationManager private constructor(
                 // ...
                 Log.println(Log.ASSERT, "in verify model", "failed = ${exception.message}")
             }
+
     }
 
     private fun verifyNativeModule() {
@@ -86,6 +87,10 @@ class TranslationManager private constructor(
                 view?.onLanguageDownloadFailure()
                 Log.println(Log.ASSERT, "in verify model", "failed")
 
+            }
+            ?.addOnCanceledListener {
+                view?.onLanguageDownloadFailure()
+                Log.println(Log.ASSERT, "in verify model", "canceled")
             }
     }
 

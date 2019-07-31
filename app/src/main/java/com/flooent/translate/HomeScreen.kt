@@ -41,6 +41,7 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
     private val REQ_CODE_SPEECH_INPUT = 100
     private var isNativeInteraction = true
     private var isNativeLangSelection = true
+    private var isTextToSpeechOn = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +75,21 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
             showLangsDialog()
         }
 
+        btn_cancelDownload.setOnClickListener {
+            onLanguageDownloadFailure()
+        }
+
+        rb_speaker.setOnClickListener {
+            setTextToSpeech(rb_speaker.isChecked)
+        }
+
         translationManager?.initTranslator(nativeLangCode, foreignLangCode)
+
+    }
+
+    private fun setTextToSpeech(checked: Boolean) {
+        isTextToSpeechOn = checked
+
 
     }
 
@@ -153,7 +168,10 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Select a Language")
         builder.setItems(langStrArr,
-            DialogInterface.OnClickListener { dialog, which -> setSelectedLang(which) })
+            DialogInterface.OnClickListener { dialog, which ->
+                setSelectedLang(which)
+                onLanguageDownloadStarted()
+            })
         builder.show()
     }
 
@@ -241,14 +259,14 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
 
     fun lockSpeakViews() {
 
-        if(isNativeInteraction){
+        if (isNativeInteraction) {
             layout_nativeSpeakProgress.visibility = View.VISIBLE
             layout_progressForeign.visibility = View.VISIBLE
 
             layout_foreignSpeakProgress.visibility = View.GONE
             layout_progressNative.visibility = View.GONE
 
-        }else{
+        } else {
             layout_nativeSpeakProgress.visibility = View.GONE
             layout_progressForeign.visibility = View.GONE
 
@@ -289,25 +307,37 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
     }
 
     fun onLanguageDownloadStarted() {
-
+        layout_downloadModule.visibility = View.VISIBLE
     }
 
     override fun onLanguageDownloadSuccessful() {
-
+        layout_downloadModule.visibility = View.GONE
     }
 
     override fun onLanguageDownloadFailure() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        layout_downloadModule.visibility = View.GONE
+        Toast.makeText(
+            this,
+            "The requested Language could not be downloaded now. Please try again later.",
+            Toast.LENGTH_LONG
+        ).show()
+        setSelectedLang(12) // 12 is index for English in the arraylist
     }
 
     override fun onTranslationSuccessful(nativeInteraction: Boolean, translatedText: String?) {
         if (nativeInteraction) {
             txt_speechOutputForeign.text = translatedText
-            ttsManager?.speakForeign(translatedText!!)
+
+            if (isTextToSpeechOn)
+                ttsManager?.speakForeign(translatedText!!)
+        
         } else {
             txt_speechOutputNative.text = translatedText
-            ttsManager?.speakNative(translatedText!!)
+
+            if (isTextToSpeechOn)
+                ttsManager?.speakNative(translatedText!!)
         }
+
 
     }
 

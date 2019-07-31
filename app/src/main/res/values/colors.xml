@@ -7,6 +7,7 @@
     <color name="grey_e2">#E2E2E2</color>
     <color name="bg_gradient_end">#FF67FF</color>
     <color name="blue">#188CFF</color>
-    <color name="transparent">#80000000</color>
+    <color name="transparent50">#80000000</color>
+    <color name="transparent30">#CD000000</color>
 
 </resources>
