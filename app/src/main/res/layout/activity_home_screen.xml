@@ -1,53 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-        <TextView
-                android:id="@+id/txt_speechOutputNative"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:padding="10dp"
-                android:gravity="center"
-                android:textColor="#000"
-                android:textSize="26dp"
-                android:textStyle="normal"
-                android:text="Your text appears here."
-                android:layout_weight="1"/>
-
-
-        <TextView
-                android:id="@+id/txt_speechOutputForeign"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:padding="10dp"
-                android:gravity="center"
-                android:textColor="#000"
-                android:textSize="26dp"
-                android:textStyle="normal"
-                android:text="Your text appears here."
-                android:layout_weight="1"
-                android:background="@color/grey_e2"/>
-
-    </LinearLayout>
-
-    <View android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="@color/white"/>
 
 
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.8"
+            android:elevation="4dp"
     >
 
         <LinearLayout
@@ -260,6 +222,73 @@
                     android:text="Cancel"/>
         </LinearLayout>
     </FrameLayout>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@color/white"/>
+
+
+    <TextView
+            android:id="@+id/txt_speckInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:textStyle="normal"
+            android:text="1.Select your languages. \n2.Tap the mic and speak."
+            android:background="@color/grey_e2"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_conversation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="8dp"
+            tools:listitem="@layout/chat_item_foreign"
+            android:visibility="gone"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <TextView
+                android:id="@+id/txt_speechOutputNative"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="#000"
+                android:textSize="26dp"
+                android:textStyle="normal"
+                android:text="Your text appears here."
+                android:layout_weight="1"/>
+
+
+        <TextView
+                android:id="@+id/txt_speechOutputForeign"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="#000"
+                android:textSize="26dp"
+                android:textStyle="normal"
+                android:text="Your text appears here."
+                android:layout_weight="1"
+                android:background="@color/grey_e2"/>
+
+    </LinearLayout>
+
+
+
 
 
 </LinearLayout>

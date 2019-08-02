@@ -2,19 +2,25 @@ package com.flooent.translate
 
 import android.Manifest
 import android.app.Activity
-import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
-import android.view.View
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -24,11 +30,11 @@ import org.json.JSONObject
 import java.io.IOException
 import java.nio.charset.Charset
 
-import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManagerListener, TextToSpeechManagerListener {
 
+    private lateinit var conversationAdapter: ConversationAdapter
     private var ttsManager: TextToSpeechManager? = null
     private var translationManager: TranslationManager? = null
     private var nativeToForeignTranslator: FirebaseTranslator? = null
@@ -42,15 +48,27 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
     private var isNativeInteraction = true
     private var isNativeLangSelection = true
     private var isTextToSpeechOn = true
+    private var conversationList = ArrayList<Conversation>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
 
         speechManager = SpeechManager.getInstance(this, applicationContext)
         translationManager = TranslationManager.getInstance(this)
         ttsManager = TextToSpeechManager.getInstance(applicationContext)
-        ttsManager
+
+
+//        conversationList.add(Conversation("Hello ", false))
+//        conversationList.add(Conversation("Hello how are you. Nice to meet u.", true))
+//        conversationList.add(Conversation("Hello how are you. Nice to meet u.", false))
+//        conversationList.add(Conversation("Hello how are you. Nice to meet u.", true))
+//        txt_speckInstruction.visibility = View.GONE
+//        rv_conversation.visibility= View.VISIBLE
+        conversationAdapter = ConversationAdapter(this, conversationList)
+        rv_conversation.adapter = conversationAdapter
+        rv_conversation.layoutManager = LinearLayoutManager(this)
 
         img_speakNative.setOnClickListener {
             //promptSpeechInput()
@@ -110,14 +128,7 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
     }
 
     private fun showSpeakNowToast() {
-
         Toast.makeText(this, "Speak Now", Toast.LENGTH_SHORT).show()
-
-//        val toast = Toast(this)
-//        toast.duration = Toast.LENGTH_SHORT
-//        toast.setMargin(10f,200f)
-//        toast.setText("Speak Now")
-//        toast.show()
     }
 
 
@@ -126,33 +137,6 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
 
         speechManager?.removeView()
         translationManager?.removeView()
-    }
-
-
-    /**
-     * Showing google speech input dialog
-     */
-    private fun promptSpeechInput() {
-        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intent.putExtra(
-            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-        )
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-        intent.putExtra(
-            RecognizerIntent.EXTRA_PROMPT,
-            getString(R.string.speech_prompt)
-        )
-        try {
-            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT)
-        } catch (a: ActivityNotFoundException) {
-            Toast.makeText(
-                getApplicationContext(),
-                getString(R.string.speech_not_supported),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
     }
 
 
@@ -324,21 +308,30 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
         setSelectedLang(12) // 12 is index for English in the arraylist
     }
 
-    override fun onTranslationSuccessful(nativeInteraction: Boolean, translatedText: String?) {
+    override fun onTranslationSuccessful(nativeInteraction: Boolean, translatedText: String) {
         if (nativeInteraction) {
+            Log.e("in trans succesful", "")
             txt_speechOutputForeign.text = translatedText
 
             if (isTextToSpeechOn)
-                ttsManager?.speakForeign(translatedText!!)
-        
+                ttsManager?.speakForeign(translatedText)
+
         } else {
             txt_speechOutputNative.text = translatedText
 
             if (isTextToSpeechOn)
-                ttsManager?.speakNative(translatedText!!)
+                ttsManager?.speakNative(translatedText)
         }
+        onNewMsgArrived(nativeInteraction, Conversation(translatedText, nativeInteraction))
 
 
+    }
+
+    private fun onNewMsgArrived(nativeInteraction: Boolean, conversation: Conversation) {
+        txt_speckInstruction.visibility = View.GONE
+        rv_conversation.visibility = View.VISIBLE
+//        conversationList.add(conversation)
+        conversationAdapter.addNewMsg(conversation)
     }
 
     override fun onTranslationFailure(message: String?) {
