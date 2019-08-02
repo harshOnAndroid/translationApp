@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent" android:layout_height="match_parent"
               android:orientation="vertical">
 
 
@@ -241,15 +241,93 @@
             android:text="1.Select your languages. \n2.Tap the mic and speak."
             android:background="@color/grey_e2"/>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_conversation"
+    <FrameLayout
+            android:id="@+id/conversationLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="8dp"
-            tools:listitem="@layout/chat_item_foreign"
-            android:visibility="gone"/>
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:clipToPadding="false">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_conversation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="48dp"
+                android:clipToPadding="false"
+                tools:listitem="@layout/chat_item_foreign"/>
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+        >
+
+            <RadioGroup
+                    android:id="@+id/rg_lang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                <RadioButton
+                        android:id="@+id/rb_flagNative"
+                        android:layout_width="60dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:checked="true"
+                        android:background="@drawable/bg_native_lang_radio_btn"
+                        android:button="@null"/>
+
+
+                <RadioButton
+                        android:id="@+id/rb_flagForeign"
+                        android:layout_width="60dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:background="@drawable/bg_foreign_lang_radio_btn"
+                        android:button="@null"/>
+            </RadioGroup>
+
+            <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="35dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:src="@drawable/ic_native_flag"
+                            android:layout_gravity="center"/>
+
+                    <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="35dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:src="@drawable/ic_foreign_flag"
+                            android:layout_gravity="center"/>
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </FrameLayout>
+
+    </FrameLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -286,9 +364,6 @@
                 android:background="@color/grey_e2"/>
 
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>

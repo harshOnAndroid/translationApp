@@ -1,12 +1,10 @@
 package com.flooent.translate
 
 import android.util.Log
-import android.widget.Toast
 import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguage
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOptions
-import kotlinx.android.synthetic.main.activity_home_screen.*
 
 class TranslationManager private constructor(
     private var view: TranslationManagerListener?
@@ -16,6 +14,7 @@ class TranslationManager private constructor(
     private var foreignToNativeTranslator: FirebaseTranslator? = null
     private var nativeLangCode: String = "en"
     private var foreignLangCode: String = "en"
+    private var originalText=""
 
     companion object {
         private var instance: TranslationManager? = null
@@ -121,12 +120,14 @@ class TranslationManager private constructor(
 
     fun translateText(nativeInteraction: Boolean, resultText: String?) {
 
+        originalText = resultText!!
+
         if (nativeInteraction)
-            nativeToForeignTranslator?.translate(resultText!!)
+            nativeToForeignTranslator?.translate(originalText)
                 ?.addOnSuccessListener { translatedText ->
                     Log.e("inside native Trans", "")
 
-                    view?.onTranslationSuccessful(nativeInteraction, translatedText)
+                    view?.onTranslationSuccessful(nativeInteraction, translatedText, originalText)
 
                 }
                 ?.addOnFailureListener { exception ->
@@ -136,10 +137,10 @@ class TranslationManager private constructor(
                     view?.onTranslationFailure(exception.message)
                 }
         else
-            foreignToNativeTranslator?.translate(resultText!!)
+            foreignToNativeTranslator?.translate(originalText)
                 ?.addOnSuccessListener { translatedText ->
                     Log.e("inside foreign Trans", "")
-                    view?.onTranslationSuccessful(nativeInteraction, translatedText)
+                    view?.onTranslationSuccessful(nativeInteraction, translatedText, originalText)
                 }
                 ?.addOnFailureListener { exception ->
                     // Error.

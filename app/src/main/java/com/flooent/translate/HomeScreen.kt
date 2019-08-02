@@ -2,20 +2,16 @@ package com.flooent.translate
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
 import android.view.*
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,22 +49,24 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
 
         speechManager = SpeechManager.getInstance(this, applicationContext)
         translationManager = TranslationManager.getInstance(this)
         ttsManager = TextToSpeechManager.getInstance(applicationContext)
 
 
-//        conversationList.add(Conversation("Hello ", false))
-//        conversationList.add(Conversation("Hello how are you. Nice to meet u.", true))
-//        conversationList.add(Conversation("Hello how are you. Nice to meet u.", false))
-//        conversationList.add(Conversation("Hello how are you. Nice to meet u.", true))
-//        txt_speckInstruction.visibility = View.GONE
-//        rv_conversation.visibility= View.VISIBLE
+        txt_speckInstruction.visibility = View.GONE
+        conversationLayout.visibility= View.VISIBLE
         conversationAdapter = ConversationAdapter(this, conversationList)
         rv_conversation.adapter = conversationAdapter
         rv_conversation.layoutManager = LinearLayoutManager(this)
+
+        rg_lang.setOnCheckedChangeListener{ radioGroup: RadioGroup, i: Int ->
+            if (i == R.id.rb_flagNative)
+                conversationAdapter.changeLanguage(true)
+            else
+                conversationAdapter.changeLanguage(false)
+        }
 
         img_speakNative.setOnClickListener {
             //promptSpeechInput()
@@ -308,30 +306,37 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
         setSelectedLang(12) // 12 is index for English in the arraylist
     }
 
-    override fun onTranslationSuccessful(nativeInteraction: Boolean, translatedText: String) {
+    override fun onTranslationSuccessful(
+        nativeInteraction: Boolean,
+        translatedText: String,
+        originalText: String
+    ) {
         if (nativeInteraction) {
             Log.e("in trans succesful", "")
             txt_speechOutputForeign.text = translatedText
+//            onNewMsgArrived(nativeInteraction, Conversation(translatedText, originalText, nativeInteraction))
 
             if (isTextToSpeechOn)
                 ttsManager?.speakForeign(translatedText)
 
         } else {
             txt_speechOutputNative.text = translatedText
+//            onNewMsgArrived(nativeInteraction, Conversation(originalText, translatedText, nativeInteraction))
 
             if (isTextToSpeechOn)
                 ttsManager?.speakNative(translatedText)
         }
-        onNewMsgArrived(nativeInteraction, Conversation(translatedText, nativeInteraction))
 
+        onNewMsgArrived(Conversation(translatedText, originalText, nativeInteraction))
 
     }
 
-    private fun onNewMsgArrived(nativeInteraction: Boolean, conversation: Conversation) {
-        txt_speckInstruction.visibility = View.GONE
-        rv_conversation.visibility = View.VISIBLE
-//        conversationList.add(conversation)
+    private fun onNewMsgArrived(conversation: Conversation) {
         conversationAdapter.addNewMsg(conversation)
+        txt_speckInstruction.visibility = View.GONE
+        conversationLayout.visibility = View.VISIBLE
+        rv_conversation.scrollToPosition(conversationList.size-1)
+
     }
 
     override fun onTranslationFailure(message: String?) {
