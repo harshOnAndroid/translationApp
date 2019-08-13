@@ -53,6 +53,8 @@ class SpeechManager private constructor(
     }
 
     fun startListeningToSpeech(nativeInteraction: Boolean) {
+        Log.e("inside ","startListeningToSpeech")
+
         isNativeInteraction = nativeInteraction
 
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)

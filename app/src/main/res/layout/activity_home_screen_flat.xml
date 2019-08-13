@@ -1,7 +1,569 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+    <FrameLayout
 
-</LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+        <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1.8"-->
+        <!--android:elevation="4dp"-->
+        <!--&gt;-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="horizontal"-->
+        <!--&gt;-->
+
+
+        <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:animateLayoutChanges="true"-->
+        <!--&gt;-->
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="vertical"-->
+        <!--android:background="@color/grey_e2">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/txt_langForeign"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:text="English"-->
+        <!--android:textColor="#000"-->
+        <!--android:textSize="15dp"-->
+        <!--android:textStyle="bold"/>-->
+
+        <!--<Button-->
+        <!--android:id="@+id/img_flagForeign"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:background="@drawable/bg_globe_white"-->
+
+        <!--/>-->
+
+        <!--<FrameLayout-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_marginTop="20dp">-->
+        <!--<ImageView-->
+        <!--android:id="@+id/img_speakForeign"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:background="@null"-->
+        <!--android:src="@drawable/bg_mic_white"/>-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/layout_foreignSpeakProgress"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="center"-->
+        <!--android:background="@drawable/bg_round_filled_white"-->
+        <!--android:visibility="gone">-->
+
+        <!--<ProgressBar-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:progressTint="@color/white"-->
+        <!--/>-->
+
+        <!--</LinearLayout>-->
+        <!--</FrameLayout>-->
+
+
+        <!--</LinearLayout>-->
+
+        <!--<View-->
+        <!--android:id="@+id/layout_progressForeign"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="center"-->
+        <!--android:background="@color/transparent50"-->
+        <!--android:visibility="gone"-->
+        <!--android:clickable="true">-->
+
+        <!--&lt;!&ndash;<ProgressBar&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="40dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="40dp"/>&ndash;&gt;-->
+
+        <!--</View>-->
+
+        <!--</FrameLayout>-->
+
+        <!--</LinearLayout>-->
+
+
+        <!--<Switch-->
+        <!--android:id="@+id/rb_speakerForeign"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"/>-->
+
+        <!--<Switch-->
+        <!--android:id="@+id/rb_speakerBothLang"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_gravity="bottom|center_horizontal"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:checked="true"-->
+        <!--android:background="@drawable/bg_speaker_radio_btn"-->
+        <!--android:button="@null"-->
+        <!--android:thumb="@null"-->
+        <!--android:track="@null"/>-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/layout_downloadModule"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@color/transparent30"-->
+        <!--android:gravity="center"-->
+        <!--android:visibility="gone"-->
+        <!--android:padding="20dp"-->
+        <!--android:clickable="true"-->
+        <!--android:orientation="vertical"-->
+        <!--android:elevation="4dp"-->
+
+        <!--&gt;-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:padding="10dp"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="#fff"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textStyle="normal"-->
+        <!--android:text="Downloading selected language. Please wait..."/>-->
+
+
+        <!--<Button-->
+        <!--android:id="@+id/btn_cancelDownload"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Cancel"/>-->
+        <!--</LinearLayout>-->
+        <!--</FrameLayout>-->
+
+
+        <LinearLayout
+                android:id="@+id/layout_speckInstruction"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:clipToPadding="false"
+        android:layout_gravity="center">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:textSize="20dp"
+                    android:textStyle="normal"
+                    android:text="1.Select your languages. \n2.Tap the mic and speak."
+                    android:rotation="180"
+                    android:background="@color/grey_e2"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:textSize="20dp"
+                    android:textStyle="normal"
+                    android:text="1.Select your languages. \n2.Tap the mic and speak."
+                    android:background="@color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/conversationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:clipToPadding="false"
+                android:paddingTop="100dp"
+                android:paddingBottom="100dp"
+        >
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_foreignConversation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingRight="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:clipToPadding="false"
+                    tools:listitem="@layout/chat_item_foreign"
+                    android:layout_weight="1"
+                    android:background="@color/grey_f5"
+            />
+
+            <View android:layout_width="match_parent"
+                  android:layout_height="5dp"
+                  android:background="#000"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_nativeConversation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingRight="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:clipToPadding="false"
+                    tools:listitem="@layout/chat_item_foreign"/>
+
+
+        </LinearLayout>
+
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:layout_gravity="top"
+        >
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:rotation="180"
+                    android:padding="10dp"
+            android:background="@color/grey_e2">
+
+                <Switch
+                        android:id="@+id/swt_speakerForeign"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:checked="true"
+                        android:background="@drawable/bg_speaker_radio_btn"
+                        android:button="@null"
+                        android:thumb="@null"
+                        android:track="@null"/>
+
+                <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                >
+
+
+                    <ImageView
+                            android:id="@+id/img_speakForeign"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@null"
+                            android:src="@drawable/bg_mic_white"
+                    />
+
+                    <LinearLayout
+                            android:id="@+id/layout_foreignSpeakProgress"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:background="@drawable/bg_round_filled_white"
+                            android:visibility="gone">
+
+                        <ProgressBar
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:progressTint="@color/blue"
+                        />
+
+                    </LinearLayout>
+                </FrameLayout>
+
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="10dp"
+                >
+
+                    <ImageView
+                            android:id="@+id/img_flagForeign"
+                            android:layout_width="40dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/bg_globe_white"
+                            android:layout_marginTop="20dp"
+                    />
+                    <TextView
+                            android:id="@+id/txt_langForeign"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="English"
+                            android:textColor="#000"
+                            android:textSize="15dp"
+                            android:textStyle="bold"/>
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <View
+                    android:id="@+id/layout_progressForeign"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@color/transparent50"
+                    android:visibility="gone"
+                    android:clickable="true">
+
+                <!--<ProgressBar-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"/>-->
+
+            </View>
+
+        </FrameLayout>
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:layout_gravity="bottom"
+        >
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+            android:background="@color/white">
+
+                <Switch
+                        android:id="@+id/swt_speakerNative"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:checked="true"
+                        android:background="@drawable/bg_speaker_radio_btn"
+                        android:button="@null"
+                        android:thumb="@null"
+                        android:track="@null"/>
+
+                <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                >
+
+
+                    <ImageView
+                            android:id="@+id/img_speakNative"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@null"
+                            android:src="@drawable/bg_mic_blue"
+                    />
+
+                    <LinearLayout
+                            android:id="@+id/layout_nativeSpeakProgress"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:background="@drawable/bg_round_filled_white"
+                            android:visibility="gone">
+
+                        <ProgressBar
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:progressTint="@color/blue"
+                        />
+
+                    </LinearLayout>
+                </FrameLayout>
+
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="10dp"
+                >
+
+                    <ImageView
+                            android:id="@+id/img_flagNative"
+                            android:layout_width="40dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/bg_globe_blue"
+                            android:layout_marginTop="20dp"
+                    />
+                    <TextView
+                            android:id="@+id/txt_langNative"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="English"
+                            android:textColor="#000"
+                            android:textSize="15dp"
+                            android:textStyle="bold"/>
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <View
+                    android:id="@+id/layout_progressNative"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@color/transparent50"
+                    android:visibility="gone"
+                    android:clickable="true">
+
+                <!--<ProgressBar-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"/>-->
+
+            </View>
+
+        </FrameLayout>
+
+
+
+
+
+    </FrameLayout>
+
+
+    <LinearLayout
+            android:id="@+id/layout_downloadModule"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent30"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="20dp"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:elevation="4dp"
+
+    >
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:text="Downloading selected language. Please wait..."/>
+
+
+        <Button
+                android:id="@+id/btn_cancelDownload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"/>
+    </LinearLayout>
+    <Switch
+            android:id="@+id/swt_speakerBothLang"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:checked="true"
+            android:background="@drawable/bg_speaker_radio_btn"
+            android:button="@null"
+            android:thumb="@null"
+            android:track="@null"
+    android:visibility="gone"/>
+    <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:visibility="gone"
+    >
+
+        <RadioGroup
+                android:id="@+id/rg_lang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <RadioButton
+                    android:id="@+id/rb_flagNative"
+                    android:layout_width="60dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:checked="true"
+                    android:background="@drawable/bg_native_lang_radio_btn"
+                    android:button="@null"/>
+
+
+            <RadioButton
+                    android:id="@+id/rb_flagForeign"
+                    android:layout_width="60dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:background="@drawable/bg_foreign_lang_radio_btn"
+                    android:button="@null"/>
+        </RadioGroup>
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="35dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:src="@drawable/ic_native_flag"
+                        android:layout_gravity="center"/>
+
+                <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="35dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:src="@drawable/ic_foreign_flag"
+                        android:layout_gravity="center"/>
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+</FrameLayout>

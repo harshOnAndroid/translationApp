@@ -9,13 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.flooent.translate.ConversationAdapter.ConversationHolder
 import kotlinx.android.synthetic.main.chat_item_native.view.*
 
-class ConversationAdapter constructor(
+class ConversationAdapter(
     private var context: Context,
-    private var conversationList: ArrayList<Conversation>
+    conversation: ArrayList<Conversation>,
+    private var showNativeLang : Boolean
 
 ) : RecyclerView.Adapter<ConversationHolder>() {
+    private var conversationList= ArrayList<Conversation>()
 
-    private var showNativeLang = true
+    init{
+        conversationList = ArrayList()
+        conversationList.addAll(conversation)
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConversationHolder {
 
@@ -49,11 +55,20 @@ class ConversationAdapter constructor(
                 holder.txtSpeech.text = conversation.originalText
         }
 
+        if (!showNativeLang)
+        holder.txtSpeech.rotation = 180f
+
     }
 
     fun addNewMsg(newConversation: Conversation) {
         conversationList.add(newConversation)
         this.notifyItemInserted(conversationList.size - 1)
+    }
+
+
+    fun updateList(list:ArrayList<Conversation>){
+        conversationList.clear()
+        conversationList.addAll(list)
     }
 
     fun changeLanguage(showNativeLang:Boolean){
