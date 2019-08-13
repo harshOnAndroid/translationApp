@@ -79,6 +79,18 @@
 
                 </LinearLayout>
 
+                <Switch
+                        android:id="@+id/swt_speakerNative"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="start|center_vertical"
+                        android:checked="true"
+                        android:background="@drawable/bg_speaker_radio_btn"
+                        android:button="@null"
+                        android:thumb="@null"
+                        android:track="@null"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"/>
                 <View
                         android:id="@+id/layout_progressNative"
                         android:layout_width="match_parent"
@@ -158,6 +170,20 @@
 
                 </LinearLayout>
 
+
+                <Switch
+                        android:id="@+id/swt_speakerForeign"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:checked="true"
+                        android:background="@drawable/bg_speaker_radio_btn"
+                        android:button="@null"
+                        android:thumb="@null"
+                        android:track="@null"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="20dp"/>
+
                 <View
                         android:id="@+id/layout_progressForeign"
                         android:layout_width="match_parent"
@@ -178,17 +204,6 @@
         </LinearLayout>
 
         <Switch
-                android:id="@+id/swt_speakerNative"
-                android:layout_width="0dp"
-                android:layout_height="0dp"/>
-
-
-        <Switch
-                android:id="@+id/swt_speakerForeign"
-                android:layout_width="0dp"
-                android:layout_height="0dp"/>
-
-        <Switch
                 android:id="@+id/swt_speakerBothLang"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -198,7 +213,8 @@
                 android:background="@drawable/bg_speaker_radio_btn"
                 android:button="@null"
                 android:thumb="@null"
-                android:track="@null"/>
+                android:track="@null"
+        android:visibility="gone"/>
 
         <LinearLayout
                 android:id="@+id/layout_downloadModule"

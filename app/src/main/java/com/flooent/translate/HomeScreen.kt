@@ -36,7 +36,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManagerListener, TextToSpeechManagerListener,
-    SensorEventListener{
+    SensorEventListener {
 
     private var selectedLangNative: String? = "English"
     private var selectedLangForeign: String? = "English"
@@ -82,7 +82,7 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
     private lateinit var mSensorHandler: Handler
     private lateinit var setFlatViewRunnable: Runnable
     private lateinit var setVerticalViewRunnable: Runnable
-    private lateinit var viewModel:HomeScreenViewModel
+    private lateinit var viewModel: HomeScreenViewModel
 
     private var isFlat = false
     private lateinit var detectTiltRunnable: Runnable
@@ -97,7 +97,7 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
         ttsManager = TextToSpeechManager.getInstance(applicationContext)
 
         viewModel = ViewModelProviders.of(this).get(HomeScreenViewModel::class.java)
-        viewModel.getUsers().observe(this, object: Observer<List<Conversation>>,
+        viewModel.getUsers().observe(this, object : Observer<List<Conversation>>,
             Observable() {
             override fun onChanged(t: List<Conversation>?) {
 //                conversationAdapterNative.addNewMsg(conversation)
@@ -234,22 +234,16 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
         rv_nativeConversation.adapter = conversationAdapterNative
         rv_nativeConversation.layoutManager = LinearLayoutManager(this)
         rv_foreignConversation.adapter = conversationAdapterForeign
-        if(isFlat)
-            rv_foreignConversation.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL,true)
+        if (isFlat)
+            rv_foreignConversation.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, true)
         else
             rv_foreignConversation.layoutManager = LinearLayoutManager(this)
 
         initListeners()
 
-        if (isTextToSpeechOnNative && isTextToSpeechOnForeign) {
-            swt_speakerBothLang.isChecked = true
-            swt_speakerForeign.isChecked = true
-            swt_speakerNative.isChecked = true
-        } else {
-            swt_speakerBothLang.isChecked = false
-            swt_speakerForeign.isChecked = false
-            swt_speakerNative.isChecked = false
-        }
+        swt_speakerForeign.isChecked = isTextToSpeechOnForeign
+        swt_speakerNative.isChecked = isTextToSpeechOnNative
+
 
         if (conversationList.size > 0) {
             conversationLayout.visibility = View.VISIBLE
@@ -273,7 +267,7 @@ class HomeScreen : AppCompatActivity(), SpeechManagerListener, TranslationManage
                 Manifest.permission.RECORD_AUDIO
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-Log.e("inside ","listenAndTranslate ")
+            Log.e("inside ", "listenAndTranslate ")
             speechManager?.startListeningToSpeech(isNativeInteraction)
             showSpeakNowToast()
         } else {
@@ -327,7 +321,7 @@ Log.e("inside ","listenAndTranslate ")
             ttsManager?.setNativeLanguage(nativeLangCode)
         } else {
             selectedLangForeign = selectedLang?.name
-            txt_langForeign.text =selectedLangForeign
+            txt_langForeign.text = selectedLangForeign
             foreignLangCode = selectedLang?.code!!
             speechManager?.changeForeignLang(foreignLangCode)
             translationManager?.changeForeignLang(foreignLangCode)
